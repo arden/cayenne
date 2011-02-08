@@ -12,24 +12,24 @@ It is heavily influenced by [that legendary framework](http://www.sinatrarb.com)
 
 ### Hi, World
 
-Put this in your `cuppa.coffee`:
+Put this in your `cayenne.coffee`:
 
     get '/': 'hi'
 
 And drink it!
 
     $ npm install cayenne
-    $ cayenne cuppa.coffee
+    $ cayenne cayenne.coffee
     => App "default" listening on port 5678...
 
 If you're going to restart it a thousand times per minute while developing like me, just let Cayenne do the job for you:
 
-    $ cayenne -w cuppa.coffee
+    $ cayenne -w cayenne.coffee
 
 And if you ever need to run it with the vanilla node command, we've got that covered:
 
-    $ cayenne -c cuppa.coffee
-    $ node cuppa.js
+    $ cayenne -c cayenne.coffee
+    $ node cayenne.js
 
 ### OK, but one-line string responses are mostly useless. Can you show me something closer to a real web app?
 
