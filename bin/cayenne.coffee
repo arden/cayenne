@@ -1,6 +1,6 @@
 #!/usr/bin/env coffee
 
-zappa = require 'zappa'
+cayenne = require 'cayenne'
 coffee = require 'coffee-script'
 fs = require 'fs'
 path = require 'path'
@@ -21,12 +21,12 @@ else
 
 usage = '''
   Usage:
-    zappa [OPTIONS] path/to/app.coffee
+    cayenne [OPTIONS] path/to/app.coffee
 '''
 
 switches = [
   ['-h', '--help', 'Displays this wonderful, elucidative help message']
-  ['-v', '--version', 'Shows zappa version']
+  ['-v', '--version', 'Shows cayenne version']
   ['-p', '--port [NUMBER]', 'The port(s) the app(s) will listen on. Ex.: 8080 or 4567,80,3000']
   ['-n', '--hostname [STRING]', 'If omitted, will accept connections to any ipv4 address (INADDR_ANY)']
   ['-c', '--compile', 'Compiles the app(s) to a .js file instead of running them.']
@@ -38,7 +38,7 @@ compile = (coffee_path, callback) ->
     if err then callback(err)
     else
       js = coffee.compile String(data), bare: yes
-      js = "require('zappa').run(function(){#{js}});"
+      js = "require('cayenne').run(function(){#{js}});"
       js_path = path.basename(coffee_path, path.extname(coffee_path)) + '.js'
       dir = path.dirname coffee_path
       js_path = path.join dir, js_path
@@ -53,7 +53,7 @@ remove_watch_option = ->
   argv.splice(i, 1) if i > -1
 
 spawn_child = ->
-  child = spawn 'zappa', argv
+  child = spawn 'cayenne', argv
   child.stdout.on 'data', (data) ->
     data = String(data)
     if data.match /^Included file \".*\.coffee\"/
@@ -82,7 +82,7 @@ if options.port
 
 if args.length is 0
   puts parser.help() if options.help or argv.length is 0
-  puts zappa.version if options.version
+  puts cayenne.version if options.version
   process.exit()
 else
   file = args[0]
@@ -102,4 +102,4 @@ else
         spawn_child()
         watch file
       else
-        zappa.run_file file, options
+        cayenne.run_file file, options

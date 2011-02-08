@@ -1,5 +1,5 @@
 {
-  "name": "zappa",
+  "name": "cayenne",
   "description": "Web development, cut-the-crap style.",
   "version": "0.1.4",
   "author": "Maurice Machado <maurice@bitbending.com>",
@@ -18,7 +18,7 @@
     "jquery": ">= 1.4.3"
   },
   "keywords": ["framework", "websockets", "coffeescript"],
-  "bin": { "zappa": "./bin/zappa.coffee" },
+  "bin": { "cayenne": "./bin/cayenne.coffee" },
   "directories": { "lib": "./lib" },
   "engines": { "node": ">= 0.2.6" }
 }

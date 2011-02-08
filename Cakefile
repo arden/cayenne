@@ -3,7 +3,7 @@
 {puts} = require 'sys'
 
 task 'build', ->
-  exec 'coffee -c lib/zappa.coffee', (err) ->
+  exec 'coffee -c lib/cayenne.coffee', (err) ->
     puts err if err
 
 task 'test', ->

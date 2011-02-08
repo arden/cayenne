@@ -5,18 +5,18 @@ assert = require 'assert'
 
 {spawn} = require 'child_process'
 
-zappa_a = spawn 'zappa', ['-p', '4440', 'hi.coffee'], {cwd: 'examples/'}
-zappa_b = spawn 'zappa', ['-p', '4441', 'partials.coffee'], {cwd: 'examples/'}
-zappa_c = spawn 'zappa', ['-p', '4442', 'websockets.coffee'], {cwd: 'examples/'}
+zappa_a = spawn 'cayenne', ['-p', '4440', 'hi.coffee'], {cwd: 'examples/'}
+zappa_b = spawn 'cayenne', ['-p', '4441', 'partials.coffee'], {cwd: 'examples/'}
+zappa_c = spawn 'cayenne', ['-p', '4442', 'websockets.coffee'], {cwd: 'examples/'}
 
-# zappa.stdout.on 'data', (data) ->
+# cayenne.stdout.on 'data', (data) ->
 #   puts 'stdout: ' + data
 # 
-# zappa.stderr.on 'data', (data) ->
+# cayenne.stderr.on 'data', (data) ->
 #   puts 'stderr: ' + data
 # 
-# zappa.on 'exit', (code) ->
-#   puts 'zappa exited with code ' + code
+# cayenne.on 'exit', (code) ->
+#   puts 'cayenne exited with code ' + code
 
 browser = soda.createClient
   host: 'localhost'

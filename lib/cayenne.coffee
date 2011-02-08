@@ -1,4 +1,4 @@
-zappa = exports
+cayenne = exports
 express = require 'express'
 fs = require 'fs'
 puts = console.log
@@ -8,7 +8,7 @@ jquery = null
 io = null
 coffeekup = null
 
-class Zappa
+class cayenne
   constructor: ->
     @context = {}
     @apps = {}
@@ -278,10 +278,10 @@ class RequestHandler
 
     opts = options.options or {} # Options for the templating engine.
     opts.context ?= @context
-    opts.context.zappa = partial: @partial
+    opts.context.cayenne = partial: @partial
     opts.locals ?= {}
     opts.locals.partial = (template, context) ->
-      text ck_options.context.zappa.partial template, context
+      text ck_options.context.cayenne.partial template, context
 
     template = @views[template] if typeof template is 'string'
 
@@ -358,10 +358,10 @@ class MessageHandler
 
     opts = options.options or {} # Options for the templating engine.
     opts.context ?= @context
-    opts.context.zappa = partial: @partial
+    opts.context.cayenne = partial: @partial
     opts.locals ?= {}
     opts.locals.partial = (template, context) ->
-      text ck_options.context.zappa.partial template, context
+      text ck_options.context.cayenne.partial template, context
 
     template = @app.views[template] if typeof template is 'string'
 
@@ -429,8 +429,8 @@ publish_api = (from, to, methods) ->
       else
         to[name] = from[name]
 
-z = new Zappa()
+z = new cayenne()
 
-zappa.version = '0.1.4'
-zappa.run = -> z.run.apply z, arguments
-zappa.run_file = -> z.run_file.apply z, arguments
+cayenne.version = '0.1.4'
+cayenne.run = -> z.run.apply z, arguments
+cayenne.run_file = -> z.run_file.apply z, arguments

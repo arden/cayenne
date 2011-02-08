@@ -4,7 +4,7 @@
   - Soda tests by Nicholas Kinsey.
   - `broadcast` passing along optional `except` param to socket.io.
   - Empty app files now start a default "blank" app, serving files at /public.
-  - `zappa -n/--hostname` to listen on a specific hostname or IP.
+  - `cayenne -n/--hostname` to listen on a specific hostname or IP.
   - Made defs available to postrenders' scope.
   - Bug fixes.
 
@@ -12,8 +12,8 @@
 
   - Updated to CoffeeScript 0.9.5 and node 0.2.5/0.3.1.
   - Partials support.
-  - Compilation to .js file with `zappa -c`.
-  - Auto-restarting on changes with `zappa -w`.
+  - Compilation to .js file with `cayenne -c`.
+  - Auto-restarting on changes with `cayenne -w`.
 
 **v0.1.2** (2010-11-13):
 
