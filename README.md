@@ -1,16 +1,6 @@
-    8888888888P        d8888 8888888b.  8888888b.     d8888          @@@    @@@        
-          d88P        d88888 888   Y88b 888   Y88b   d88888        @@@@@@@@@@@@@@          
-         d88P        d88P888 888    888 888    888  d88P888       @@@@@@@@@@@@@@@@           
-        d88P        d88P 888 888   d88P 888   d88P d88P 888      @@@@@@@@  @@@@@@@@            
-       d88P        d88P  888 8888888P"  8888888P" d88P  888      @@@            @@@             
-      d88P        d88P   888 888        888      d88P   888      @@   @@@@@@@@   @@             
-     d88P        d8888888888 888        888     d8888888888           @@@@@@@@                  
-    d8888888888 d88P     888 888        888    d88P     888            @@@@@@                           
-             
+Cayenne is a CoffeeScript's web framework on top of Express,Connect,Socket.IO frameworks. 
 
-### Razor-sharp DSL for modern web apps
-
-Zappa is a [CoffeeScript](http://coffeescript.org) DSLish layer on top of [Express](http://expressjs.com), [Socket.IO](http://socket.io) and other libs, with two obssessions in mind:
+Cayenne is a [CoffeeScript](http://coffeescript.org) DSLish layer on top of [Express](http://expressjs.com), [Socket.IO](http://socket.io) and other libs, with two obssessions in mind:
 
 - Providing a radically focused interface for building web apps, delaying my carpal tunnel a few years.
 
@@ -18,7 +8,7 @@ Zappa is a [CoffeeScript](http://coffeescript.org) DSLish layer on top of [Expre
 
 It is heavily influenced by [that legendary framework](http://www.sinatrarb.com) named after another awesome Frank, with also a hint of [Camping](http://camping.rubyforge.org/).
 
-**Put on your helmet!** Zappa is barely past the proof of concept stage and things are loosely placed. Don't use it to control your nuclear launch facility just yet. All examples work though, and if you come with a spirit of adventure, you shall be rewarded.
+**Put on your helmet!** Cayenne is barely past the proof of concept stage and things are loosely placed. Don't use it to control your nuclear launch facility just yet. All examples work though, and if you come with a spirit of adventure, you shall be rewarded.
 
 ### Hi, World
 
@@ -28,17 +18,17 @@ Put this in your `cuppa.coffee`:
 
 And drink it!
 
-    $ npm install zappa
-    $ zappa cuppa.coffee
+    $ npm install cayenne
+    $ cayenne cuppa.coffee
     => App "default" listening on port 5678...
 
-If you're going to restart it a thousand times per minute while developing like me, just let zappa do the job for you:
+If you're going to restart it a thousand times per minute while developing like me, just let Cayenne do the job for you:
 
-    $ zappa -w cuppa.coffee
+    $ cayenne -w cuppa.coffee
 
 And if you ever need to run it with the vanilla node command, we've got that covered:
 
-    $ zappa -c cuppa.coffee
+    $ cayenne -c cuppa.coffee
     $ node cuppa.js
 
 ### OK, but one-line string responses are mostly useless. Can you show me something closer to a real web app?
@@ -101,7 +91,7 @@ Or if you can't / don't want to use the fat arrow to bind "@/this":
 
 ### Let me guess. You can also post/put/del, use regexes, routes are matched first to last, all like any self-respecting sinatra clone.
 
-Exactly. Actually, when it comes to HTTP zappa hands over all the serious work to express, so there are no big surprises here:
+Exactly. Actually, when it comes to HTTP Cayenne hands over all the serious work to express, so there are no big surprises here:
 
     get '/': 'got'
     post '/': 'posted'
@@ -132,7 +122,7 @@ You can also use the syntax where the first param is the path, and the second th
 
 But the web is not just about HTTP requests anymore. WebSockets are soon to become available on all major browsers but IE. For this sucker and legacy browsers, there's a collection of hacks that are ugly but work, and thanks to Socket.IO, we don't even have to care.
 
-Zappa pushes this trivialization a bit further by removing some of the boilerplate, and providing some integration. The goal is to make messaging feel more like a first-class citizen along with request handling, readily available, instead of an exotic feature you bolt on your app.
+Cayenne pushes this trivialization a bit further by removing some of the boilerplate, and providing some integration. The goal is to make messaging feel more like a first-class citizen along with request handling, readily available, instead of an exotic feature you bolt on your app.
 
 All you have to do to handle bi-directional messaging in your apps is declare the handlers, side by side with your HTTP ones:
 
@@ -157,9 +147,9 @@ All you have to do to handle bi-directional messaging in your apps is declare th
     msg afk: ->
       broadcast 'afk', id: id
 
-When your app starts, if you defined one of those handlers, zappa will automatically require Socket.IO and fire it up. It will not take up a dedicated port, since Socket.IO can attach itself to the HTTP server and intercept websocket/comet related messages.
+When your app starts, if you defined one of those handlers, Cayenne will automatically require Socket.IO and fire it up. It will not take up a dedicated port, since Socket.IO can attach itself to the HTTP server and intercept websocket/comet related messages.
 
-Zappa uses a minimal protocol to enable handler wiring. If you send this message from the client:
+Cayenne uses a minimal protocol to enable handler wiring. If you send this message from the client:
 
     {said: {text: "hi"}}
 
@@ -241,7 +231,7 @@ Helpers are just like defs, except they are modified to have access to the same 
 
 Rendering things linearly is often the approach that makes more sense, but sometimes DOM manipulation can avoid loads of repetition. The best DOM libraries in the world are in javascript, and thanks to the work of Elijah Insua with [jsdom](http://jsdom.org/), you can use some with node too.
 
-Zappa makes it trivial to post-process your rendered templates by manipulating them with jQuery:
+Cayenne makes it trivial to post-process your rendered templates by manipulating them with jQuery:
 
     postrender plans: ->
       $('.staff').remove() if @user.plan isnt 'staff'
@@ -255,7 +245,7 @@ It currently works with your inner templates only though, not layouts.
 
 ### App combo
 
-There are no "run" blocking calls in node, so you can have multiple apps listening to different ports on the same process. To do that with zappa, just name your apps:
+There are no "run" blocking calls in node, so you can have multiple apps listening to different ports on the same process. To do that with Cayenne, just name your apps:
 
     get '/': 'blog'
 
@@ -265,14 +255,14 @@ There are no "run" blocking calls in node, so you can have multiple apps listeni
     app 'wiki'
     get '/': 'wiki'
 
-    $ zappa apps.coffee
+    $ cayenne apps.coffee
     => App "default" started on port 5678
     => App "chat" started on port 5679
     => App "wiki" started on port 5680
 
 To specify the ports:
 
-    $ zappa -p 3000,4567,8080 apps.coffee
+    $ cayenne -p 3000,4567,8080 apps.coffee
 
 ### Splitting up
 
@@ -318,6 +308,6 @@ Once it's running, simply launch the automated tests:
 
 ## Whew!
 
-That's it for now. Big thanks to all behind the libs that are making this little experiment possible. Special thanks to Jeremy Ashkenas for CoffeeScript, the "little" language is simply amazing and incredibly flexible. To Blake Mizerany for Sinatra, the framework that made me redefine simple. To why the lucky stiff, that made me redefine hacking. And finally to Frank Zappa, for the spirit of nonconformity and experimentation that inspires me to push forward. Not to mention providing the soundtrack.
+That's it for now. Big thanks to all behind the libs that are making this little experiment possible. Special thanks to Jeremy Ashkenas for CoffeeScript, the "little" language is simply amazing and incredibly flexible. To Blake Mizerany for Sinatra, the framework that made me redefine simple. To why the lucky stiff, that made me redefine hacking. And finally to Frank Cayenne, for the spirit of nonconformity and experimentation that inspires me to push forward. Not to mention providing the soundtrack.
 
 "Why do you necessarily have to be wrong just because a few million people think you are?" - FZ
