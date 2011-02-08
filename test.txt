@@ -1,0 +1,3 @@
+cd /windows/f/repository/arden/cayenne/examples
+
+/windows/f/repository/arden/cayenne/bin/cayenne.coffee partials.coffee

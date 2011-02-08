@@ -1,6 +1,7 @@
 #!/usr/bin/env coffee
 
-cayenne = require 'cayenne'
+#cayenne = require 'cayenne'
+cayenne = require '/windows/f/repository/arden/cayenne/lib'
 coffee = require 'coffee-script'
 fs = require 'fs'
 path = require 'path'

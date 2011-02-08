@@ -28,9 +28,9 @@ class Cayenne
           @ensure_app 'default' unless @current_app?
           @current_app[name].apply @current_app, arguments
 
-  app: (name) ->
-    @ensure_app name
-    @current_app = @apps[name]
+  app: (config) ->
+    @ensure_app config
+    @current_app = @apps[config.name]
   
   include: (file) ->
     @define_with @read_and_compile(file)
@@ -39,9 +39,9 @@ class Cayenne
   define_with: (code) ->
     scoped(code)(@context, @locals)
 
-  ensure_app: (name) ->
-    @apps[name] = new App(name) unless @apps[name]?
-    @current_app = @apps[name] unless @current_app?
+  ensure_app: (config) ->
+    @apps[config.name] = new App(config) unless @apps[config.name]?
+    @current_app = @apps[config.name] unless @current_app?
 
   read_and_compile: (file) ->
     coffee = require 'coffee-script'
@@ -76,9 +76,9 @@ class Cayenne
       i++
 
 class App
-  constructor: (@name) ->
-    @name ?= 'default'
-    @port = 5678
+  constructor: (@config) ->
+    @name ?= @config.name
+    @port = 3000
     
     @http_server = express.createServer()
     if coffeekup?
@@ -89,7 +89,10 @@ class App
       @http_server.use express.bodyDecoder()
       @http_server.use express.cookieDecoder()
       # TODO: Make the secret configurable.
-      @http_server.use express.session(secret: 'hackme')
+      # @http_server.use express.session(secret: 'hackme')
+      @http_server.use @config.session if @config.session
+
+      puts @config.session
 
     # App-level vars, exposed to handlers as [app]."
     @vars = {}
