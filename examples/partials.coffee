@@ -15,6 +15,18 @@ get '/': ->
     {name: 'python', url: 'http://python.org'}
   ]
   puts @id
+  puts params.id
+  puts session.id
+  puts request.sessionID
+  render 'default', options: {format: yes}
+
+get '/test': ->
+  @items = [
+    {name: 'coffeescript', url: 'http://coffeescript.org'}
+    {name: 'ruby', url: 'http://ruby-lang.org'}
+    {name: 'python', url: 'http://python.org'}
+  ]
+  puts @id
   render 'default', options: {format: yes}
 
 view ->
