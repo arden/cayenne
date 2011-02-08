@@ -1,9 +1,10 @@
 {
   "name": "cayenne",
-  "description": "Web development, cut-the-crap style.",
-  "version": "0.1.4",
-  "author": "Maurice Machado <maurice@bitbending.com>",
+  "description": "CoffeeScript's web framework on top of Express,Connect,Socket.IO frameworks.",
+  "version": "0.1.5",
+  "author": "arden <arden.emily@gmail.com>",
   "contributors": [ 
+    {"name": "arden", "email": "arden.emily@gmail.com"},
     {"name": "Maurice Machado", "email": "maurice@bitbending.com"},
     {"name": "Nicholas Kinsey", "email": "nicholas.kinsey@feistystudios.com"},
     {"name": "Jae Kwon", "email": "jae@flywheelnetworks.com"},
@@ -11,9 +12,9 @@
     {"name": "Isaac Wolkerstorfer", "email": "agnoster@gmail.com"}
   ],
   "dependencies": {
-    "express": ">= 1.0.1",
+    "express": ">= 1.0.7",
     "coffeekup": ">= 0.2.2",
-    "coffee-script": ">= 1.0.0",
+    "coffee-script": ">= 1.0.1",
     "socket.io": ">= 0.6.3",
     "jquery": ">= 1.4.3"
   },

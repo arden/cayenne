@@ -8,7 +8,7 @@ jquery = null
 io = null
 coffeekup = null
 
-class cayenne
+class Cayenne
   constructor: ->
     @context = {}
     @apps = {}
@@ -429,8 +429,8 @@ publish_api = (from, to, methods) ->
       else
         to[name] = from[name]
 
-z = new cayenne()
+c = new Cayenne()
 
-cayenne.version = '0.1.4'
-cayenne.run = -> z.run.apply z, arguments
-cayenne.run_file = -> z.run_file.apply z, arguments
+cayenne.version = '0.1.5'
+cayenne.run = -> c.run.apply c, arguments
+cayenne.run_file = -> c.run_file.apply c, arguments
