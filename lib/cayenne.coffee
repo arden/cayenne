@@ -117,7 +117,7 @@ class App
               link rel: 'stylesheet', href: s + '.css'
           link(rel: 'stylesheet', href: @stylesheet + '.css') if @stylesheet
           style @style if @style
-        body @content
+        body @body
     
   start: (options) ->
     options ?= {}
@@ -298,7 +298,7 @@ class RequestHandler
 
     if options.layout
       layout = @layouts[options.layout]
-      opts.context.content = result
+      opts.context.body = result
       result = coffeekup.render layout, opts
 
     @response.send result
@@ -378,7 +378,7 @@ class MessageHandler
 
     if options.layout
       layout = @layouts[options.layout]
-      opts.context.content = result
+      opts.context.body = result
       result = coffeekup.render layout, opts
 
     @send 'render', value: result

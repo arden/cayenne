@@ -179,7 +179,7 @@ With `client` you can define a route `/name.js` that will respond with your Coff
       html ->
         head -> title 'bla'
         script src: '/index.js'
-      body -> @content
+      body -> @body
 
 This is the first of a series of planned features to ease client/server integration. Next on the list is function/class sharing between your handlers and your clients.
 

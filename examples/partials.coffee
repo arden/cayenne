@@ -5,14 +5,16 @@ config =
 
 app 'default', config
 
-def hello: (arg) ->
-  console.log express
-  console.log arg
+def hello: (req, res, next) ->
+  console.log 'aaa'
+  #next()
+  #res.redirect('http://www.javaeye.com');
 
 helper myhelper: (name) ->
   'hello'
 
 all '/': ->
+  hello request, response, next
   @items = [
     {name: 'coffeescript', url: 'http://coffeescript.org'}
     {name: 'ruby', url: 'http://ruby-lang.org'}
