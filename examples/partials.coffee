@@ -1,13 +1,11 @@
 express = require 'express'
-
-config = 
-  session:express.session(secret: 'hackme')
-
-app 'default', config
-
 puts = console.log
 
-get '/': ->
+#config = 
+#  session:express.session(secret: 'hackme')
+#app 'default', config
+
+all '/': ->
   @items = [
     {name: 'coffeescript', url: 'http://coffeescript.org'}
     {name: 'ruby', url: 'http://ruby-lang.org'}

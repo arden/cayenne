@@ -22,7 +22,7 @@ class Cayenne
       process: process
       module: module
 
-    for name in 'get|post|put|del|route|at|msg|client|using|def|helper|postrender|layout|view|style'.split '|'
+    for name in 'all|get|post|put|del|route|at|msg|client|using|def|helper|postrender|layout|view|style'.split '|'
       do (name) =>
         @locals[name] = =>
           @ensure_app 'default', {} unless @current_app?
@@ -139,10 +139,12 @@ class App
     puts "App \"#{@name}\" listening on #{if @hostname? then @hostname + ':' else '*:'}#{@port}..."
     @http_server
 
+  all: -> @route 'all', arguments  
   get: -> @route 'get', arguments
   post: -> @route 'post', arguments
   put: -> @route 'put', arguments
   del: -> @route 'del', arguments
+
   route: (verb, args) ->
     if typeof args[0] isnt 'object'
       @register_route verb, args[0], args[1]
