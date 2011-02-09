@@ -1,10 +1,9 @@
 express = require 'express'
 
 config = 
-  name: 'default'
   session:express.session(secret: 'hackme')
 
-app(config)
+app 'default', config
 
 puts = console.log
 
@@ -37,7 +36,19 @@ view ->
 view item: ->
   li -> a href: @i.url, -> @i.name
 
-config = 
-  name: 'test'
 
-app config
+
+
+
+
+
+
+config = 
+  session:express.session(secret: 'arden')
+
+app 'test', config
+
+
+get '/': ->  
+  puts session.id
+  '3001'

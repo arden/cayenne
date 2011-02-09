@@ -15,7 +15,7 @@ class Cayenne
     @current_app = null
 
     @locals =
-      app: (name) => @app name
+      app: (name, config) => @app name, config
       include: (path) => @include path
       require: require
       global: global
@@ -25,12 +25,12 @@ class Cayenne
     for name in 'get|post|put|del|route|at|msg|client|using|def|helper|postrender|layout|view|style'.split '|'
       do (name) =>
         @locals[name] = =>
-          @ensure_app 'default' unless @current_app?
+          @ensure_app 'default', {} unless @current_app?
           @current_app[name].apply @current_app, arguments
 
-  app: (config) ->
-    @ensure_app config
-    @current_app = @apps[config.name]
+  app: (name, config) ->
+    @ensure_app name, config
+    @current_app = @apps[name]
   
   include: (file) ->
     @define_with @read_and_compile(file)
@@ -39,9 +39,9 @@ class Cayenne
   define_with: (code) ->
     scoped(code)(@context, @locals)
 
-  ensure_app: (config) ->
-    @apps[config.name] = new App(config) unless @apps[config.name]?
-    @current_app = @apps[config.name] unless @current_app?
+  ensure_app: (name, config) ->
+    @apps[name] = new App(name, config) unless @apps[name]?
+    @current_app = @apps[name] unless @current_app?
 
   read_and_compile: (file) ->
     coffee = require 'coffee-script'
@@ -76,8 +76,8 @@ class Cayenne
       i++
 
 class App
-  constructor: (@config) ->
-    @name ?= @config.name
+  constructor: (@name, @config) ->
+    @name ?= 'default'
     @port = 3000
     
     @http_server = express.createServer()
@@ -92,6 +92,7 @@ class App
       # @http_server.use express.session(secret: 'hackme')
       @http_server.use @config.session if @config.session
 
+      puts @name
       puts @config.session
 
     # App-level vars, exposed to handlers as [app]."
@@ -149,7 +150,7 @@ class App
     if typeof args[0] isnt 'object'
       @register_route verb, args[0], args[1]
     else
-      for k, v of args[0]
+      for k, v of args[0]        
         @register_route verb, k, v
 
   register_route: (verb, path, response) ->
@@ -247,7 +248,6 @@ class RequestHandler
 
   execute: (request, response, next) ->
     @init_locals() unless @locals?
-
     @locals.context = {}
     @locals.params = @locals.context
 
