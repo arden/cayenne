@@ -1,16 +1,24 @@
 express = require 'express'
-puts = console.log
 
-#config = 
-#  session:express.session(secret: 'hackme')
-#app 'default', config
+config = 
+  session:express.session(secret: 'hackme')
+
+app 'default', config
+
+def hello: (arg) ->
+  console.log express
+  console.log arg
+
+helper myhelper: (name) ->
+  'hello'
 
 all '/': ->
   @items = [
     {name: 'coffeescript', url: 'http://coffeescript.org'}
     {name: 'ruby', url: 'http://ruby-lang.org'}
     {name: 'python', url: 'http://python.org'}
-  ]
+  ]  
+  @hello = myhelper 'hello'   
   puts @id
   puts params.id
   puts session.id
@@ -26,7 +34,8 @@ get '/test': ->
   puts @id
   render 'default', options: {format: yes}
 
-view ->
+view ->  
+  p -> @hello
   ul ->
     for i in @items
       partial 'item', i: i
