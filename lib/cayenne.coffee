@@ -79,6 +79,7 @@ class App
   constructor: (@name, @config) ->
     @name ?= 'default'
     @port = 3000
+    @secretkey = 'Vk2gxZav3CWDH6UB2DkEOIdvxDKI95IKmIfvNIBQqSkJPTxDZkxw3JAblwJBjCX2'
     
     @http_server = express.createServer()
     if coffeekup?
@@ -89,11 +90,7 @@ class App
       @http_server.use express.bodyDecoder()
       @http_server.use express.cookieDecoder()
       # TODO: Make the secret configurable.
-      # @http_server.use express.session(secret: 'hackme')
-      @http_server.use @config.session if @config.session
-
-      puts @name
-      puts @config.session
+      if @config.session then @http_server.use @config.session else @http_server.use express.session(secret: @secretkey)
 
     # App-level vars, exposed to handlers as [app]."
     @vars = {}
