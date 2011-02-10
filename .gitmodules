@@ -1,0 +1,3 @@
+[submodule "examples/zappirynth"]
+	path = examples/zappirynth
+	url = git://github.com/bragi/zappirynth.git
